@@ -51,9 +51,9 @@ int main() {
         return -1;
     }
 
-    Mat frame, gray, binary;
-    TickMeter tm;  // TickMeter 객체 생성
-    int frameCount = 0;  // 프레임 수 카운트 변수
+    Mat frame, gray, binary;//컬러,그레이,이진 
+    TickMeter tm;  
+    int frameCount = 0;  
 
     while (true) {
         tm.start();  // 실행 시간 측정 시작
@@ -65,7 +65,7 @@ int main() {
             break;
         }
 
-        // 그레이스케일 변환
+       
         cvtColor(frame, gray, COLOR_BGR2GRAY);
 
         // 이진 변환
@@ -75,15 +75,9 @@ int main() {
         writer1 << frame;
         writer2 << gray;
         writer3 << binary;
-
-        
-
-        
-        if (waitKey(30) >= 0) break;
-		// TickMeter 초기화
-		tm.stop();  // 실행 시간 측정 종료
-		// 실행 시간(ms 단위) 및 프레임 수 출력
-        cout << "Frame: " << frameCount << " | Execution time: " << tm.getTimeMilli() << " ms" << endl;
+	waitKey(30);
+	tm.stop();  // 실행 시간 측정 종료
+        cout << "Frame: " << frameCount << " | Execution time: " << tm.getTimeMilli() << " ms" << endl;// 실행 시간(ms 단위) 및 프레임 수 출력
         tm.reset();
     }
 
