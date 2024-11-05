@@ -8,3 +8,7 @@ src 변수는 GStreamer 파이프라인을 정의하고
 
 
 
+![image](https://github.com/user-attachments/assets/b78b15af-fcf6-46c7-918e-0fd9cda7d89c)
+
+
+사진을 보면 33ms정도가 나오는것을 확인할 수 있다.
