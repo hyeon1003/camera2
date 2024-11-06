@@ -5,7 +5,7 @@ TARGET = dx2
 OBJS = main.o dxl.o
 $(TARGET) : $(OBJS)
 	$(CX) -o $(TARGET) $(OBJS) $(DXLFLAGS)
-main.o : main.cpp
+main.o : main.cpp dxl.hpp
 	$(CX) $(CXFLAGS) -c main.cpp $(DXLFLAGS)
 dxl.o : dxl.hpp dxl.cpp
 	$(CX) $(CXFLAGS) -c dxl.cpp $(DXLFLAGS)
