@@ -8,3 +8,8 @@
 설명하라.
 
 알고리즘을 작성할때 해당속도에 도달하는 값을 천천히 올리도록 설정하여 급가속,급감속을 예방한다.
+
+결과 사진
+
+
+![image](https://github.com/user-attachments/assets/4356825c-8db3-4a5a-8931-8d7c04d317e4)
