@@ -1,0 +1,43 @@
+#include "vision.hpp"
+#include <sys/time.h>
+
+int main() {
+    VideoCapture source("5_lt_cw_100rpm_out.mp4"); // 동영상 파일 경로
+    if (!source.isOpened()) {
+        cerr << "video open failed!" << endl;
+        return -1;
+    }
+    bool first_run = true; // 초기 실행 여부
+    Point tmp_pt; // 추적할 라인의 중심
+    Mat frame, gray, thresh, result, stats, centroids; // 처리에 필요한 Mat 객체
+    int error; // 에러 값 저장
+    struct timeval start, end1; // 시간 측정용
+    double diff1;
+    while (true) {
+        gettimeofday(&start, NULL); // 실행 시간 시작
+
+        preprocess(source, frame, gray, thresh); // 프레임 전처리
+        if (thresh.empty()) break; // 프레임이 없으면 종료
+
+        if (first_run) {
+            tmp_pt = Point(thresh.cols / 2, thresh.rows - 1); // 초기 위치 설정
+            first_run = false;
+        }
+
+        findObjects(thresh, tmp_pt, result, stats, centroids); // 라인 탐지
+        drawObjects(stats, centroids, tmp_pt, result); 
+
+        error = getError(result, tmp_pt); // 에러 계산
+
+        if (waitKey(30) == 27) break; // 'Esc' 키를 누르면 종료
+
+        gettimeofday(&end1, NULL); 
+        diff1 = end1.tv_sec + end1.tv_usec / 1000000.0 - start.tv_sec - start.tv_usec / 1000000.0;
+        cout << "error : " << error << "\ttime : " << diff1 << "s" << endl;
+
+        imshow("frame", frame);
+        imshow("thresh", result);
+    }
+
+    return 0;
+}
